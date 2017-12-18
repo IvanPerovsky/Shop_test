@@ -1,0 +1,43 @@
+{% extends "shop/base.html" %}
+{% block title %}
+    Your shopping cart
+{% endblock %}
+{% block content %}
+    <h1>Ваша корзина товаров</h1>
+    <table >
+        <thead>
+        <tr>
+            <th>Фото</th>
+            <th>Товар</th>
+            <th>Количество</th>
+            <th>Цена</th>
+            <th>Общая стоимость</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            {% with product=item.product %}
+                <tr>
+                    <td>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="
+                                {% if product.image %}
+                                    {{ product.image.url }}
+                                {% else %}
+                                    Картинки нет
+                                {% endif %}">
+                        </a>
+                    </td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td >{{ item.price }}RUB</td>
+                    <td >{{ item.total_price }}RUB</td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="{% url 'shop:index' %}" >Continue shopping</a>
+    </p>
+{% endblock %}

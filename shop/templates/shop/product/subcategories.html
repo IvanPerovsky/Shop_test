@@ -1,0 +1,26 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Товары{% endif %}
+{% endblock %}
+{% block content %}
+    <div >
+        <h3>Группы</h3>
+        <ul>
+            {% for c in categories %}
+                <li >
+                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <h1>{% if category %}{{ category.name }}{% else %}Подгруппы{% endif %}</h1>
+        {% for f in subcategories %}
+            <div>
+                <a href="{{ f.get_absolute_url }}">{{ f.name }}</a>
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
